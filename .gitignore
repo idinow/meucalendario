@@ -12,3 +12,7 @@
 /npm-debug.log*
 /yarn-debug.log*
 /yarn-error.log*
+
+# Arquivos gerados a partir do sass
+/src/calendar/index.css
+/src/calendar/index.css.map 
