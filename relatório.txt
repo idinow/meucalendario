@@ -1,3 +1,7 @@
 Segunda - 22/05:
 - Reunião: Wellington e Larissa:
 Definição e distribuição da implementação, bem como de como estruturar as contruibuições indivduais. 
+
+Sábado - 27/05:
+Para converter um arquivo de extensão .scss para .css
+deve ser instalada a biblioteca SASS: npm install sass

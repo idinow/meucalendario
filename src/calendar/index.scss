@@ -1,0 +1,30 @@
+//#A9E5D0; /* Cor da borda da grade */
+
+@import '../../node_modules/react-big-calendar/lib/sass/styles';
+
+$cor-verde-agua: #A9E5D0;
+
+.rbc-timeslot-group{
+  border-bottom: 1px solid $cor-verde-agua;
+}
+.rbc-time-content > * + * > *{
+  border-left: 1px solid $cor-verde-agua;
+}
+.rbc-month-row + .rbc-month-row {
+  border-top: 1px solid $cor-verde-agua;
+}
+.rbc-day-bg + .rbc-day-bg {
+  border-left: 1px solid $cor-verde-agua;
+}
+.rbc-time-header.rbc-overflowing {
+  background-color: $cor-verde-agua;
+}
+.rbc-header{
+  border-bottom: 0px;
+}
+.rbc-header + .rbc-header, .rbc-time-header-content {
+  border-left: 0px;
+}
+.element.style {
+  margin-right: 0px;
+}
