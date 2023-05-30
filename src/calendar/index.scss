@@ -10,27 +10,37 @@ $cor-verde-agua: #A9E5D0;
 .rbc-time-content > * + * > *{
   border-left: 1px solid $cor-verde-agua;
 }
-.rbc-month-row + .rbc-month-row {
-  border-top: 1px solid $cor-verde-agua;
-}
-.rbc-day-bg + .rbc-day-bg {
-  border-left: 1px solid $cor-verde-agua;
-}
+// .rbc-month-row + .rbc-month-row {
+//   border-top: 1px solid $cor-verde-agua;
+// }
+// .rbc-day-bg + .rbc-day-bg {
+//   border-left: 1px solid $cor-verde-agua;
+// }
 .rbc-time-header.rbc-overflowing {
   background-color: $cor-verde-agua;
+  margin-right: 0px;
 }
 .rbc-header{
   border-bottom: 0px;
 }
-.rbc-header + .rbc-header, .rbc-time-header-content {
-  border-left: 0px;
+// .rbc-header + .rbc-header, .rbc-time-header-content {
+//   border-left: 0px;
+// }
+// .element.style {
+//    margin-right: 0px;
+// }
+// .rbc-month-view {
+//   border: 1px solid $cor-verde-agua;
+// }
+// .rbc-row.rbc-month-header{
+//   border: 1px solid $cor-verde-agua;
+// }
+
+.rbc-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.element.style {
-  margin-right: 0px;
-}
-.rbc-month-view {
-  border: 1px solid $cor-verde-agua;
-}
-.rbc-row.rbc-month-header{
-  border: 1px solid $cor-verde-agua;
+.rbc-toolbar button.add-event-button{
+  background-color: #19A372;
 }
