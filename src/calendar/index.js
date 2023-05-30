@@ -3,36 +3,28 @@ import moment from 'moment';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'moment/locale/pt-br'; // Importe a localização do Moment.js para o idioma português
 import logo from './calendarLogo.png'
+import lupa from './lupa.svg'
 import './index.scss';
 
 const localizer = momentLocalizer(moment);
+
 const MyCalendar = () => {
   return (
-    <div style={{ height: 'calc(90vh)' }}>
-      <img src={logo} alt='' style={{ width: 'calc(10vh)', height: 'auto' }}/>
+    <div style={{ height: 'calc(80vh)' }}>
+      <img src={logo} alt='' style={{ width: '75px', height: 'auto' }}/>
       <Calendar
         localizer={localizer}
         views={['week']}
-        defaultView="week"
+        defaultView='week'
         events={[]}
         components={{toolbar: CustomToolbar,
-          // day: {header: ({ label }) => (
-          //   <CustomDayHeader label={label} formatHeader={dayHeaderFormat} />
-          // )}
         }}
-        style={{ margin: '100px' }}
       />
     </div>
   );
 };
-// // Defina o formato do cabeçalho para exibir apenas o dia da semana
-// const dayHeaderFormat = (date, culture, localizer) =>
-//   localizer.format(date, 'dddd', culture);
 
-// // Componente personalizado para o cabeçalho do dia
-// const CustomDayHeader = ({ label, formatHeader }) => (
-//   <div>{formatHeader(label)}</div>
-// );
+export default MyCalendar;
 
 const CustomToolbar = ({ label, onNavigate }) => (
   <div className="rbc-toolbar">
@@ -52,10 +44,10 @@ const CustomToolbar = ({ label, onNavigate }) => (
         + Evento
       </button>
       <button type="button" className="search-button">
-        Buscar
+      <img src={lupa} alt='' style={{ width: '20px', height: 'auto' }}></img> Buscar
       </button>
     </span>
   </div>
 );
 
-export default MyCalendar;
+

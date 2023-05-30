@@ -7,6 +7,9 @@ $cor-verde-agua: #A9E5D0;
 .rbc-timeslot-group{
   border-bottom: 1px solid $cor-verde-agua;
 }
+.rbc-time-content{
+  background-color: #fff;
+}
 .rbc-time-content > * + * > *{
   border-left: 1px solid $cor-verde-agua;
 }
@@ -43,4 +46,20 @@ $cor-verde-agua: #A9E5D0;
 }
 .rbc-toolbar button.add-event-button{
   background-color: #19A372;
+  color: #ffff;
+}
+.rbc-toolbar button.search-button{
+  background-color: #fff;
+}
+.rbc-calendar{
+  margin-top: 40px;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-bottom: 10px;
+}
+.rbc-timeslot-group {
+  min-height: 100px;
+}
+body{
+  background-color: #F4F4F4;
 }
