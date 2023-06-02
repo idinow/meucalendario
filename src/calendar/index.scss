@@ -1,6 +1,8 @@
 //#A9E5D0; /* Cor da borda da grade */
 
 @import '../../node_modules/react-big-calendar/lib/sass/styles';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 
 $cor-verde-agua: #A9E5D0;
 
@@ -8,6 +10,7 @@ $cor-verde-agua: #A9E5D0;
   border-bottom: 1px solid $cor-verde-agua;
 }
 .rbc-time-content{
+  font-family: 'Montserrat', sans-serif;
   background-color: #fff;
 }
 .rbc-time-content > * + * > *{
@@ -20,13 +23,18 @@ $cor-verde-agua: #A9E5D0;
 //   border-left: 1px solid $cor-verde-agua;
 // }
 .rbc-time-header.rbc-overflowing {
+  font-family: 'Montserrat', sans-serif;
   background-color: $cor-verde-agua;
   margin-right: 0px;
 }
 .rbc-header{
   border-bottom: 0px;
 }
-// .rbc-header + .rbc-header, .rbc-time-header-content {
+.rbc-button-link{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
 //   border-left: 0px;
 // }
 // .element.style {
@@ -45,11 +53,19 @@ $cor-verde-agua: #A9E5D0;
   align-items: center;
 }
 .rbc-toolbar button.add-event-button{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  padding: 9px;
   background-color: #19A372;
   color: #ffff;
 }
 .rbc-toolbar button.search-button{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
   background-color: #fff;
+}
+.rbc-toolbar button{
+  font-family: 'Montserrat', sans-serif;
 }
 .rbc-calendar{
   margin-top: 40px;
