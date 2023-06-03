@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 .geral {
-    font-family: Arial, sans-serif;
+    font-family: "Montserrat", sans-serif;
     background-color: #f1f1f1;
     display: flex;
     align-items: center;
@@ -55,6 +57,6 @@
   
   .container .toggle-form {
     color: blue;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
   }

@@ -28,7 +28,7 @@ function LoginForm({ onLogin }) {
                 <p>
                     Não tem uma conta?{' '}
                     <span className="toggle-form" onClick={toggleForm}>
-                    Cadastrar novo usuário
+                    Cadastre-se
                     </span>
                 </p>
                 </form>

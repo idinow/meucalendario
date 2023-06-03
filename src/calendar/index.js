@@ -48,7 +48,7 @@ const MyCalendar = () => {
         isOpen={isModalOpen} 
         onRequestClose={closeModal}
         className="custom-modal"
-        overlayClassName="custo-modal-overlay"
+        overlayClassName="custom-modal-overlay"
       >
         <h2>Criar evento</h2>
         <form>
@@ -62,6 +62,7 @@ const MyCalendar = () => {
           <input type = "text" />
         </form>
         <button onClick={closeModal}>Salvar</button>
+        <button onClick={closeModal}>Cancelar</button>
       </Modal>
     </div>
   );
