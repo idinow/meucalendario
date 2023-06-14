@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import LoginForm from './LoginForm';
-import MyCalendar from './calendar';
+import LoginForm from './pages/login';
+import MyCalendar from './pages/calendar';
 
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);

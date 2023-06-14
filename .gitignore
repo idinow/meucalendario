@@ -15,4 +15,9 @@
 
 # Arquivos gerados a partir do sass
 /src/calendar/index.css
-/src/calendar/index.css.map 
+/src/calendar/index.css.map
+
+# Arquivo de configuração da conexão firebase
+/src/services/firebaseConnection.js
+
+/.firebase

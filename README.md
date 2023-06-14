@@ -8,7 +8,7 @@ Trabalho em grupo da disciplina de Programação WEB.
  - IGOR DELGADO VERA
 FACOM/UFMS
 
-# Executar o seguinte comando para instalar as bibliotecas necessárias
+## Executar o seguinte comando para instalar as bibliotecas necessárias
 ```shell
-npm install @testing-library/jest-dom @testing-library/react @testing-library/user-event moment react react-big-calendar react-dom react-scripts sass web-vitals react-modal
+npm install @testing-library/jest-dom @testing-library/react @testing-library/user-event moment react react-big-calendar react-dom react-scripts sass web-vitals react-modal firebase
 ```
