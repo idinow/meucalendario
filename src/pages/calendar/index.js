@@ -48,6 +48,10 @@ const MyCalendar = () => {
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}/>,
        }}
+        messages={{noEventsInRange:'Não há eventos nesta faixa de datas.',
+        date: 'Data',
+        time: 'Hora',
+        event: 'Evento',}}
       />
       {isModalOpen && (
         <FormsEvent

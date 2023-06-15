@@ -1,12 +1,11 @@
 import React from 'react';
 import FormsEvent from './formsEvent';
-import lupa from '../../assets/lupa.svg'
 
 
-const CustomToolbar = ({ label, onNavigate,
-  setCurrentView, isModalOpen, setIsModalOpen }) => (
+const CustomToolbar = ({ label, onNavigate, currentView,
+  setCurrentView, isModalOpen, setIsModalOpen }) => {
   
-  
+  return(
   <div className="rbc-toolbar">
     <span className="rbc-btn-group">
       <button type="button" onClick={() => onNavigate('PREV')}>
@@ -23,12 +22,13 @@ const CustomToolbar = ({ label, onNavigate,
       <button type="button" className="add-event-button" onClick={() => setIsModalOpen(true)}>
         + Evento
       </button>
-      <button type="button" className="search-button" onClick={() => setCurrentView('agenda')}>
-      <img src={lupa} alt='' style={{ width: '20px', height: 'auto' }}></img> Buscar
+      <button type="button" className="search-agenda-button" onClick={() => setCurrentView(
+        currentView ==='agenda' ? 'week' : 'agenda')}>
+      {currentView === 'agenda' ? 'Agenda' : 'Buscar'}
       </button>
     </span>
     <FormsEvent isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
   </div>
-);
+  )};
 
 export default CustomToolbar;
