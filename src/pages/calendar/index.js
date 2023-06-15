@@ -21,6 +21,9 @@ const MyCalendar = () => {
 
   const [selectedEvent, setSelectedEvent] = useState(null);
 
+  const [currentView, setCurrentView] = useState('week');
+
+
   useEffect(() => {
     const fetchData = async () => {
       const fetchedEvents = await fetchEvents();
@@ -35,11 +38,13 @@ const MyCalendar = () => {
       <img src={logo} alt='' style={{ width: '75px', height: 'auto' }}/>
       <Calendar
         localizer={localizer}
-        views={['week']}
-        defaultView='week'
+        views={['week', 'agenda']}
+        view={currentView}
         events={events}
         onSelectEvent= {(event) => {setIsModalOpen(true); setSelectedEvent(event);}} 
-        components={{toolbar: props => <CustomToolbar {...props} 
+        components={{toolbar: props => <CustomToolbar {...props}
+            currentView={currentView}
+            setCurrentView={setCurrentView}
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}/>,
        }}

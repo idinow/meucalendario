@@ -3,7 +3,8 @@ import FormsEvent from './formsEvent';
 import lupa from '../../assets/lupa.svg'
 
 
-const CustomToolbar = ({ label, onNavigate, isModalOpen, setIsModalOpen }) => (
+const CustomToolbar = ({ label, onNavigate,
+  setCurrentView, isModalOpen, setIsModalOpen }) => (
   
   
   <div className="rbc-toolbar">
@@ -22,7 +23,7 @@ const CustomToolbar = ({ label, onNavigate, isModalOpen, setIsModalOpen }) => (
       <button type="button" className="add-event-button" onClick={() => setIsModalOpen(true)}>
         + Evento
       </button>
-      <button type="button" className="search-button">
+      <button type="button" className="search-button" onClick={() => setCurrentView('agenda')}>
       <img src={lupa} alt='' style={{ width: '20px', height: 'auto' }}></img> Buscar
       </button>
     </span>
