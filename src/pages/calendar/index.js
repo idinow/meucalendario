@@ -23,15 +23,21 @@ const MyCalendar = () => {
 
   const [currentView, setCurrentView] = useState('week');
 
+  const fetchData = async () => {
+    const fetchedEvents = await fetchEvents();
+    setEvents(fetchedEvents);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const fetchedEvents = await fetchEvents();
-      setEvents(fetchedEvents);
-    };
-
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      setSelectedEvent(null);
+      fetchData();
+    }
+  }, [isModalOpen]);
 
   return (
     <div style={{ height: 'calc(80vh)' }}>
@@ -58,8 +64,10 @@ const MyCalendar = () => {
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           selectedEvent={selectedEvent}
+          setSelectedEvent={setSelectedEvent}
         /> 
       )}
+      
     </div>
   );
 };

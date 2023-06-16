@@ -8,6 +8,7 @@ export const fetchEvents = async () => {
   querySnapshot.forEach((doc) => {
     const eventData = doc.data();
     const event = {
+      id: doc.id,
       title: eventData.title,
       start: new Date(eventData.startDate + "T" + eventData.startTime),
       end: new Date(eventData.endDate + "T" + eventData.endTime),

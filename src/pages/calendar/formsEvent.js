@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import db from '../../services/firebaseConnection';
 import moment from 'moment';
 
-const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
+const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent, setSelectedEvent}) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endDate, setEndDate] = useState('');
   const [endTime, setEndTime] = useState('');
   const [description, setDescription] = useState('');
+  const [idEvent, setIdEvent] = useState(null);
 
   useEffect(() => {
     if (selectedEvent) {
+      setIdEvent(selectedEvent.id);
       setTitle(selectedEvent.title);
       setStartDate(moment(selectedEvent.start).format('YYYY-MM-DD'));
       setStartTime(moment(selectedEvent.start).format('HH:mm'));
@@ -21,6 +23,7 @@ const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
       setEndTime(moment(selectedEvent.end).format('HH:mm'));
       setDescription(selectedEvent.description);
     } else {
+      setIdEvent(null);
       setTitle('');
       setStartDate('');
       setStartTime('');
@@ -31,28 +34,22 @@ const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
   }, [selectedEvent]);
 
   async function handleAdd() {
-    await addDoc(collection(db, "event"), {
+    let eventData = {
       title: title,
       startDate: startDate,
       startTime: startTime,
       endDate: endDate,
       endTime: endTime,
       description: description
-    })
-    .then(() => {
-    console.log("Dados registrados no banco" );
-    setTitle('');
-    setStartDate('');
-    setStartTime('');
-    setEndDate('');
-    setEndTime('');
-    setDescription('');
-    
-    })
-    .catch((error) => {
-    console.log("Gerou um erro ao adicionar" + error);
-    });
-
+    };
+  
+    if (idEvent !== null) {
+      const eventRef = doc(db, "event", idEvent);
+      await updateDoc(eventRef, eventData)
+    } else {
+      await addDoc(collection(db, "event"), eventData)
+      console.log("Novo Evento")
+    }
     setIsModalOpen(false);
   }
 
@@ -94,7 +91,7 @@ const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
         <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
       </form>
       <button onClick={handleAdd}>Salvar</button>
-      <button onClick={() => setIsModalOpen(false)}>Cancelar</button>
+      <button onClick={() => setIsModalOpen(false) }>Cancelar</button>
     </Modal>
   )
 };
