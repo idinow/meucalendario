@@ -4,7 +4,7 @@ import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import db from '../../services/firebaseConnection';
 import moment from 'moment';
 
-const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent, setSelectedEvent}) => {
+const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState('');
   const [startTime, setStartTime] = useState('');

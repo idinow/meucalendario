@@ -1,78 +1,14 @@
+import React, {Component} from "react";
+import MyCalendar from "./myCalendar";
+import withDragAndDrop from "../../../node_modules/react-big-calendar/lib/addons/dragAndDrop"
 
-import moment from 'moment';
-import React, {useEffect, useState} from 'react';
-import { Calendar, momentLocalizer } from 'react-big-calendar';
-import 'moment/locale/pt-br'; // Importe a localização do Moment.js para o idioma português
-import logo from '../../assets/calendarLogo.png'
-import './calendar.scss';
-import CustomToolbar from './toolbar';
-import { fetchEvents } from './events';
-import FormsEvent from './formsEvent';
+const DragAndDropCalendar = withDragAndDrop(MyCalendar);
 
-
-const localizer = momentLocalizer(moment);
-
-
-const MyCalendar = () => {
-
-  const [isModalOpen, setIsModalOpen] = useState(false)   // Verifica se o Modal está aberto
-
-  const [events, setEvents] = useState([]);
-
-  const [selectedEvent, setSelectedEvent] = useState(null);
-
-  const [currentView, setCurrentView] = useState('week');
-
-  const fetchData = async () => {
-    const fetchedEvents = await fetchEvents();
-    setEvents(fetchedEvents);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (!isModalOpen) {
-      setSelectedEvent(null);
-      fetchData();
-    }
-  }, [isModalOpen]);
-
-  return (
-    <div style={{ height: 'calc(80vh)' }}>
-      <img src={logo} alt='' style={{ width: '75px', height: 'auto' }}/>
-      <Calendar
-        localizer={localizer}
-        views={['week', 'agenda']}
-        view={currentView}
-        events={events}
-        onSelectEvent= {(event) => {setIsModalOpen(true); setSelectedEvent(event);}} 
-        components={{toolbar: props => <CustomToolbar {...props}
-            currentView={currentView}
-            setCurrentView={setCurrentView}
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}/>,
-       }}
-        messages={{noEventsInRange:'Não há eventos nesta faixa de datas.',
-        date: 'Data',
-        time: 'Hora',
-        event: 'Evento',}}
-      />
-      {isModalOpen && (
-        <FormsEvent
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-          selectedEvent={selectedEvent}
-          setSelectedEvent={setSelectedEvent}
-        /> 
-      )}
-      
-    </div>
-  );
-};
-
-export default MyCalendar;
-
-
-
+class Dnd extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+}
+export default DragAndDropCalendar;

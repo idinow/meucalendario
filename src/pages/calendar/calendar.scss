@@ -6,22 +6,17 @@
 
 $cor-verde-agua: #A9E5D0;
 
+
 .rbc-timeslot-group{
   border-bottom: 1px solid $cor-verde-agua;
 }
 .rbc-time-content{
   font-family: 'Montserrat', sans-serif;
-  background-color: #fff;
+  background-color: white;
 }
 .rbc-time-content > * + * > *{
   border-left: 1px solid $cor-verde-agua;
 }
-// .rbc-month-row + .rbc-month-row {
-//   border-top: 1px solid $cor-verde-agua;
-// }
-// .rbc-day-bg + .rbc-day-bg {
-//   border-left: 1px solid $cor-verde-agua;
-// }
 .rbc-time-header.rbc-overflowing {
   font-family: 'Montserrat', sans-serif;
   background-color: $cor-verde-agua;
@@ -34,47 +29,30 @@ $cor-verde-agua: #A9E5D0;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
 }
-
-//   border-left: 0px;
-// }
-// .element.style {
-//    margin-right: 0px;
-// }
-// .rbc-month-view {
-//   border: 1px solid $cor-verde-agua;
-// }
-// .rbc-row.rbc-month-header{
-//   border: 1px solid $cor-verde-agua;
-// }
-
 .rbc-toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .rbc-toolbar-right{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.rbc-toolbar button.add-event-button{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-  padding: 9px;
-  background-color: #19A372;
-  color: #ffff;
-}
-.rbc-toolbar button.search-agenda-button{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-  padding: 9px;
-  background-color: #fff;
-  display: flex;
-  align-items: center;
-}
 .rbc-toolbar button{
   font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+.rbc-toolbar button.add-event-button{
+  padding: 9px;
+  background-color: #19A372;
+  color: white;
+}
+.rbc-toolbar button.search-agenda-button{
+  padding: 9px;
+  background-color: white;
+  display: flex;
+  align-items: center;
 }
 .rbc-calendar{
   margin-top: 40px;
@@ -88,7 +66,6 @@ $cor-verde-agua: #A9E5D0;
 body{
   background-color: #F4F4F4;
 }
-
 .custom-modal {
   font-family: 'Montserrat', sans-serif;
   position: fixed;
@@ -102,11 +79,9 @@ body{
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
-
 body.custom-modal-open {
   overflow: hidden;
 }
-
 .custom-modal-overlay {
   position: fixed;
   top: 0;
@@ -116,28 +91,23 @@ body.custom-modal-open {
   backdrop-filter: blur(5px);
   z-index: 999;
 }
-
 .custom-modal h2 {
   margin-top: 0;
 }
-
 .custom-modal form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
 .custom-modal label {
   font-weight: bold;
 }
-
 .custom-modal input[type="text"],
 .custom-modal input[type="date"] {
   padding: 5px;
   border-radius: 3px;
   border: 1px solid #ccc;
 }
-
 .custom-modal button {
   padding: 5px 10px;
   background-color: #007bff;
@@ -147,41 +117,24 @@ body.custom-modal-open {
   cursor: pointer;
   margin: 10px 10px 0px 0px;
 }
-
-.custom-modal button[type="submit"] {
-  background-color: #28a745;
-}
-
-.custom-modal button[type="submit"]:hover,
-.custom-modal button[type="submit"]:focus {
-  background-color: #218838;
-}
-
-.custom-modal button[type="button"] {
-  background-color: #dc3545;
-}
-
-.custom-modal button[type="button"]:hover,
-.custom-modal button[type="button"]:focus {
-  background-color: #c82333;
-}
-
 .form-row {
   display: flex;
 }
-
 .form-column {
   flex: 1;
-  margin-right: 15px; /* Ajuste a margem conforme necessário */
+  margin-right: 15px;
 }
-
-/* Opcional: Caso queira que os elementos ocupem larguras iguais */
 .form-column input{
   width: 100%;
   height: 30px;
   padding: 5px;
   border: 1px solid #ccc;
 }
-
+.rbc-event{
+  background-color:#7ab8a2;
+}
+.rbc-day-slot .rbc-event, .rbc-day-slot .rbc-background-event{
+  border: 1px solid #5da189;
+}
 
 
