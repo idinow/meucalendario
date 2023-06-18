@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
-import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc, deleteDoc, onSnapshot } from "firebase/firestore";
 import db from '../../services/firebaseConnection';
 import moment from 'moment';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { fetchEvents } from './events';
 
 const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
   const [title, setTitle] = useState('');
@@ -12,6 +14,8 @@ const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
   const [endTime, setEndTime] = useState('');
   const [description, setDescription] = useState('');
   const [idEvent, setIdEvent] = useState(null);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     if (selectedEvent) {
@@ -33,6 +37,18 @@ const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
     }
   }, [selectedEvent]);
 
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'event'), (snapshot) => {
+      const updatedEvents = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      // Atualiza a lista de eventos com os dados mais recentes
+      setEvents(updatedEvents);
+    });
+
+    return () => {
+      unsubscribe(); // Cancela o listener quando o componente for desmontado
+    };
+  }, []);
+
   async function handleAdd() {
     let eventData = {
       title: title,
@@ -52,6 +68,24 @@ const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
     }
     setIsModalOpen(false);
   }
+  async function handleDelete() {
+    setShowDeleteConfirmation(true)
+  }
+
+  async function confirmDelete() {
+    setShowDeleteConfirmation(false);
+    if (idEvent !== null) {
+      const eventRef = doc(db, "event", idEvent);
+      await deleteDoc(eventRef);
+      setIsModalOpen(false);
+      alert('Evento excluído com sucesso!');
+      fetchEvents(setEvents);
+    }
+  }
+
+  function cancelDelete() {
+    setShowDeleteConfirmation(false);
+  }
 
   return (
     <Modal
@@ -60,7 +94,7 @@ const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
       className="custom-modal"
       overlayClassName="custom-modal-overlay"
     >
-      <h2>Criar evento</h2>
+      <h2>{selectedEvent ? 'Editar Evento' : 'Criar Evento'}</h2>
       <form>
         <label>Título</label>
         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -90,10 +124,25 @@ const FormsEvent = ({ isModalOpen, setIsModalOpen, selectedEvent}) => {
         <label>Descrição:</label>
         <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
       </form>
-      <button onClick={handleAdd}>Salvar</button>
+      <button onClick={handleAdd}>{selectedEvent ? 'Atualizar': 'Salvar'}</button>
+      {selectedEvent && (
+        <button onClick={handleDelete} style ={{marginLeft:'10px'}}>Excluir</button>
+      )}  
       <button onClick={() => setIsModalOpen(false) }>Cancelar</button>
+      {showDeleteConfirmation && (
+        <div className="custom-modal-overlay">
+          <div className="custom-modal">
+            <h2>Confirmar exclusão</h2>
+            <p>Você tem certeza que deseja excluir o evento "{selectedEvent.title}"?</p>
+            <div>
+              <button onClick={confirmDelete}>Sim</button>
+              <button onClick={cancelDelete}>Não</button>
+            </div>
+          </div>
+        </div>
+      )}
     </Modal>
-  )
+  );
 };
 
 export default FormsEvent;

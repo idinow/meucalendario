@@ -1,22 +1,28 @@
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import db from '../../services/firebaseConnection';
 
-export const fetchEvents = async () => {
-  const querySnapshot = await getDocs(collection(db, "event"));
-  const fetchedEvents = [];
 
-  querySnapshot.forEach((doc) => {
-    const eventData = doc.data();
-    const event = {
-      id: doc.id,
-      title: eventData.title,
-      start: new Date(eventData.startDate + "T" + eventData.startTime),
-      end: new Date(eventData.endDate + "T" + eventData.endTime),
-      description: eventData.description,
-    };
+export const fetchEvents = (updatedEvents) => {
+  const eventsCollection = collection(db, "event");
+  const unsubscribe = onSnapshot(eventsCollection, (querySnapshot) => {
+    const fetchedEvents = [];
 
-    fetchedEvents.push(event);
+    querySnapshot.forEach((doc) => {
+      const eventData = doc.data();
+      const event = {
+        id: doc.id,
+        title: eventData.title,
+        start: new Date(eventData.startDate + "T" + eventData.startTime),
+        end: new Date(eventData.endDate + "T" + eventData.endTime),
+        description: eventData.description,
+      };
+
+      fetchedEvents.push(event);
+    });
+
+    updatedEvents(fetchedEvents);
   });
 
-  return fetchedEvents;
+  return unsubscribe;
 };
+

@@ -6,8 +6,9 @@ import 'moment/locale/pt-br'; // Importe a localização do Moment.js para o idi
 import logo from '../../assets/calendarLogo.png'
 import './calendar.scss';
 import CustomToolbar from './toolbar';
-import { fetchEvents } from './events';
+import {fetchEvents} from './events';
 import FormsEvent from './formsEvent';
+import { FaSearch } from 'react-icons/fa';
 
 
 const localizer = momentLocalizer(moment);
@@ -22,17 +23,23 @@ class MyCalendar extends Component {
       isModalOpen: false,
       events: [],
       selectedEvent: null,
-      currentView: 'week'
+      currentView: 'week',
+      searchQuery: '',
+      foundEvents: [],
     }
   }
 
   componentDidMount() {
-    this.fetchData();
+    this.unsubscribe = fetchEvents(this.updateEvents);
+  }
+  componentWillUnmount() {
+    if(this.unsubscribe){
+    this.unsubscribe();
+    }
   }
 
-  fetchData = async () => {
-    const fetchedEvents = await fetchEvents();
-    this.setState({events: fetchedEvents});
+  updateEvents = (events) => {
+    this.setState({ events });
   };
 
   handleEventSelect = (event) => {
@@ -41,19 +48,51 @@ class MyCalendar extends Component {
 
   handleModalClose = () => {
     this.setState({ isModalOpen: false, selectedEvent: null });
-    this.fetchData();
+  
   };
 
   handleViewChange = (view) => {
     this.setState({ currentView: view });
   };
 
+  handleSearchChange = (event) => {
+    this.setState({ searchQuery: event.target.value });
+  };
+
+  handleSearchSubmit = (event) => {
+    event.preventDefault();
+  
+    // Lógica de busca de eventos aqui
+    const { searchQuery, events } = this.state;
+    const foundEvents= events.filter((event) =>
+      event.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  
+    // Faça o que desejar com os eventos encontrados
+    this.setState({foundEvents, showModal:true, searchQuery: '' });
+  };
+
+
   render() {
-    const { isModalOpen, events, selectedEvent, currentView } = this.state;
+    const { isModalOpen, events, selectedEvent, currentView, searchQuery, foundEvents} = this.state;
+
 
     return (
       <div style={{ height: 'calc(80vh)' }}>
         <img src={logo} alt='' style={{ width: '75px', height: 'auto' }}/>
+        <div className='search-bar'>
+          <form onSubmit={this.handleSearchSubmit}>
+            <input
+            type='text'
+            value={searchQuery}
+            onChange={this.handleSearchChange}
+            placeholder='Digite um evento...'
+            />
+            <button type='submit'>
+              <FaSearch />
+            </button>
+          </form>
+        </div>  
         <Calendar
           localizer={localizer}
           views={['week', 'agenda']}
@@ -80,9 +119,23 @@ class MyCalendar extends Component {
             isModalOpen={isModalOpen}
             setIsModalOpen={(value) => this.setState({ isModalOpen: value, selectedEvent: null })}
             selectedEvent={selectedEvent}
-            setSelectedEvent={(event) => this.setState({ selectedEvent: event })}
           /> 
         )}
+        {foundEvents.length > 0 && (
+        <div>
+          <h3>Eventos encontrados:</h3>
+          <ul>
+            {foundEvents.map((event) => (
+              <li key={event.id}>
+                {event.title} - {event.start.toLocaleDateString()}
+                <button onClick={() => this.handleEventSelect(event)}>
+                  Acessar o Evento
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       </div>
     );
   }
