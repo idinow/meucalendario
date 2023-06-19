@@ -20,7 +20,7 @@ const Authentic = () => {
 
 
     return (
-        <div>{userLoggedIn ? <><button onClick={handleLogout}>Sair</button></> : <p>Desconectado</p>}
+        <div className="sairBotton">{userLoggedIn ? <><button onClick={handleLogout}>Sair</button></> : <p>Desconectado</p>}
         </div>
     );
 };
