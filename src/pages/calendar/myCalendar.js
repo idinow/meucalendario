@@ -92,7 +92,24 @@ class MyCalendar extends Component {
               <FaSearch />
             </button>
           </form>
-        </div>  
+        </div> 
+        <div className='encontrarEventos'>
+          {foundEvents.length > 0 && (
+            <div>
+              <h3>Eventos encontrados:</h3>
+              <ul>
+                {foundEvents.map((event) => (
+                  <li key={event.id}>
+                    {event.title} - {event.start.toLocaleDateString()}
+                    <button onClick={() => this.handleEventSelect(event)}>
+                      Acessar o Evento
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
         <Calendar
           localizer={localizer}
           views={['week', 'agenda']}
@@ -121,21 +138,6 @@ class MyCalendar extends Component {
             selectedEvent={selectedEvent}
           /> 
         )}
-        {foundEvents.length > 0 && (
-        <div>
-          <h3>Eventos encontrados:</h3>
-          <ul>
-            {foundEvents.map((event) => (
-              <li key={event.id}>
-                {event.title} - {event.start.toLocaleDateString()}
-                <button onClick={() => this.handleEventSelect(event)}>
-                  Acessar o Evento
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
       </div>
     );
   }
